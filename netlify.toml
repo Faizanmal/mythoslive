@@ -9,3 +9,7 @@
   NODE_VERSION = "22"
   # Intentionally public Next.js browser config; must appear in the client bundle.
   SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_API_URL"
+
+# Explicit Next runtime so App Router pages are served (avoids bare .next static 404s).
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
