@@ -1,5 +1,7 @@
 [build]
   base = "frontend"
+  # Next 16 defaults to Turbopack; Netlify's builder often only loads WASM SWC,
+  # and Turbopack requires native bindings. Force Webpack for this host.
   command = "npm run build"
   publish = ".next"
 
