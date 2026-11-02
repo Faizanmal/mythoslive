@@ -1,0 +1,50 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+!.env.production.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+pytest-cache-files-*/
+.mypy_cache/
+.ruff_cache/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+dist/
+coverage/
+
+# Local data and logs
+*.log
+data/
+*.sqlite3
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+recordings/
+videos/
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.token
+*.tokens
+token-cache/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

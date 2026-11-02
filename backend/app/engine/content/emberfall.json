@@ -1,0 +1,49 @@
+{
+  "scenes": [
+    {"id":"ash-gate","title":"The Ashen Gate","text":"A warm wind carries sparks from the sealed Emberfall road.","options":[{"text":"Lift the fallen portcullis","stat":"strength","difficulty":12},{"text":"Read the old runes","stat":"intellect","difficulty":13},{"text":"Find the hidden latch","stat":"agility","difficulty":11}]},
+    {"id":"glass-orchard","title":"The Glass Orchard","text":"Crystalline fruit chimes softly among copper-leaved trees.","options":[{"text":"Cross the singing branches","stat":"agility","difficulty":12},{"text":"Ask the orchard keeper","stat":"charisma","difficulty":11}]},
+    {"id":"cinder-ferry","title":"Cinder Ferry","text":"A lantern boat waits on a river of silver mist.","options":[{"text":"Row through the mist","stat":"endurance","difficulty":12},{"text":"Trade a kind story for passage","stat":"charisma","difficulty":10}]},
+    {"id":"bell-tower","title":"The Bell That Forgot","text":"A tower bell hangs silent above a village of soot-blue roofs.","options":[{"text":"Climb to the bell","stat":"agility","difficulty":12},{"text":"Study its missing clapper","stat":"intellect","difficulty":13}]},
+    {"id":"moss-library","title":"The Moss Library","text":"Green shelves breathe the scent of rain and old paper.","options":[{"text":"Search the star atlas","stat":"intellect","difficulty":12},{"text":"Follow the friendly firefly","stat":"wisdom","difficulty":11}]},
+    {"id":"lantern-fen","title":"Lantern Fen","text":"Floating lights mark a safe path through a quiet marsh.","options":[{"text":"Follow the blue lights","stat":"wisdom","difficulty":11},{"text":"Build a reed bridge","stat":"craft","difficulty":12}]},
+    {"id":"clockwork-mill","title":"The Clockwork Mill","text":"A wooden mill turns though the stream has run dry.","options":[{"text":"Repair the waterwheel","stat":"craft","difficulty":12},{"text":"Trace the hidden gears","stat":"intellect","difficulty":13}]},
+    {"id":"warm-cavern","title":"The Warm Cavern","text":"The cave glows like a hearth and echoes with gentle humming.","options":[{"text":"Answer the echo","stat":"charisma","difficulty":10},{"text":"Map the crystal vents","stat":"intellect","difficulty":12}]},
+    {"id":"copper-bridge","title":"Copper Bridge","text":"A narrow bridge spans a canyon filled with amber clouds.","options":[{"text":"Cross together","stat":"endurance","difficulty":11},{"text":"Secure a rope line","stat":"craft","difficulty":12}]},
+    {"id":"comet-meadow","title":"Comet Meadow","text":"A tiny fallen star rests in the clover, warm and unharmed.","options":[{"text":"Guide it back skyward","stat":"wisdom","difficulty":12},{"text":"Ask the meadow sprites","stat":"charisma","difficulty":10}]},
+    {"id":"marble-steppe","title":"Marble Steppe","text":"White stones form a path across the sunlit plain.","options":[{"text":"Read the stone markers","stat":"intellect","difficulty":12},{"text":"Race the dust devils","stat":"agility","difficulty":13}]},
+    {"id":"whispering-well","title":"Whispering Well","text":"The well repeats the last kind thing spoken nearby.","options":[{"text":"Offer encouragement","stat":"charisma","difficulty":10},{"text":"Lower a lantern","stat":"craft","difficulty":11}]},
+    {"id":"frosted-archive","title":"Frosted Archive","text":"Snowflakes drift indoors around a map carved in ice.","options":[{"text":"Warm the map carefully","stat":"wisdom","difficulty":12},{"text":"Copy its symbols","stat":"intellect","difficulty":11}]},
+    {"id":"ember-market","title":"Ember Market","text":"A cheerful night market trades recipes and bright buttons.","options":[{"text":"Bargain for a compass","stat":"charisma","difficulty":11},{"text":"Help a vendor pack up","stat":"strength","difficulty":10}]},
+    {"id":"root-cellar","title":"The Root Cellar","text":"A giant root has lifted the cellar door without breaking it.","options":[{"text":"Move the root gently","stat":"strength","difficulty":12},{"text":"Ask what it needs","stat":"wisdom","difficulty":10}]},
+    {"id":"sunken-stage","title":"The Sunken Stage","text":"A tiny theater rests in a clear pool, its curtain still bright.","options":[{"text":"Perform the old play","stat":"charisma","difficulty":11},{"text":"Raise the curtain pulley","stat":"craft","difficulty":12}]},
+    {"id":"paper-kite-cliff","title":"Paper Kite Cliff","text":"A message kite is caught on a ledge above the trail.","options":[{"text":"Climb for the kite","stat":"agility","difficulty":12},{"text":"Launch a rescue kite","stat":"craft","difficulty":11}]},
+    {"id":"quiet-volcano","title":"The Quiet Volcano","text":"A volcano puffs harmless rings of warm steam.","options":[{"text":"Follow the steam patterns","stat":"wisdom","difficulty":11},{"text":"Find a cool passage","stat":"intellect","difficulty":12}]},
+    {"id":"starling-roost","title":"Starling Roost","text":"A flock of starlings circles a tower with a missing weather vane.","options":[{"text":"Build a new vane","stat":"craft","difficulty":12},{"text":"Call the flock down","stat":"charisma","difficulty":11}]},
+    {"id":"dawn-viaduct","title":"Dawn Viaduct","text":"The last bridge into Emberfall glows at the edges of morning.","options":[{"text":"Carry the lantern together","stat":"endurance","difficulty":12},{"text":"Solve the gate's riddle","stat":"intellect","difficulty":13}]}
+  ],
+  "bosses": [
+    {"id":"kiln-tortoise","name":"The Kiln Tortoise","hp":180,"defense":5,"mechanics":["shield_wall","aoe_charge","weak_point"]},
+    {"id":"bellows-drake","name":"The Bellows Drake","hp":210,"defense":4,"mechanics":["aoe_charge","summon_adds","enrage"]},
+    {"id":"copper-colossus","name":"The Copper Colossus","hp":240,"defense":7,"mechanics":["shield_wall","weak_point","enrage"]},
+    {"id":"ashen-owl","name":"The Ashen Owl","hp":190,"defense":3,"mechanics":["summon_adds","aoe_charge","weak_point"]},
+    {"id":"crystal-warden","name":"The Crystal Warden","hp":225,"defense":6,"mechanics":["shield_wall","summon_adds","enrage"]},
+    {"id":"ember-crown","name":"The Ember Crown","hp":260,"defense":6,"mechanics":["aoe_charge","weak_point","enrage"]}
+  ],
+  "riddles": [
+    {"id":"r01","question":"I have hands but no fingers, and I tell the day without a voice. What am I?","answer":"clock","aliases":["a clock","timepiece"]},
+    {"id":"r02","question":"The more I dry, the wetter I become. What am I?","answer":"towel","aliases":["a towel"]},
+    {"id":"r03","question":"I have a face and two hands, yet no arms or legs. What am I?","answer":"clock","aliases":["a clock"]},
+    {"id":"r04","question":"I can travel around the world while staying in one corner. What am I?","answer":"stamp","aliases":["postage stamp"]},
+    {"id":"r05","question":"I grow shorter as I give light. What am I?","answer":"candle","aliases":["a candle"]},
+    {"id":"r06","question":"I have many keys but open no locks; music lives in me. What am I?","answer":"piano","aliases":["a piano","keyboard"]},
+    {"id":"r07","question":"I follow you by day but disappear in the dark. What am I?","answer":"shadow","aliases":["your shadow"]},
+    {"id":"r08","question":"I have a neck but no head and hold a little drink. What am I?","answer":"bottle","aliases":["a bottle"]},
+    {"id":"r09","question":"I fall from the sky but never get hurt. What am I?","answer":"rain","aliases":["raindrop","water"]},
+    {"id":"r10","question":"I have a bed but never sleep, and a mouth but never eat. What am I?","answer":"river","aliases":["a river","stream"]},
+    {"id":"r11","question":"I am full of holes yet can carry water. What am I?","answer":"sponge","aliases":["a sponge"]},
+    {"id":"r12","question":"I show towns and rivers but contain no houses or fish. What am I?","answer":"map","aliases":["a map"]},
+    {"id":"r13","question":"I get bigger when you take more away from me. What am I?","answer":"hole","aliases":["a hole"]},
+    {"id":"r14","question":"I have one eye but cannot see, and help mend a tear. What am I?","answer":"needle","aliases":["a needle"]},
+    {"id":"r15","question":"I am heard but never seen, and answer when a canyon calls. What am I?","answer":"echo","aliases":["an echo"]}
+  ]
+}

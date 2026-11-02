@@ -1,0 +1,101 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-mythoslive}
+      POSTGRES_USER: ${POSTGRES_USER:-mythos}
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      BUILD_VERSION: ${BUILD_VERSION:-local}
+      DATABASE_URL: ${DATABASE_URL:-postgresql+asyncpg://${POSTGRES_USER:-mythos}@db:5432/${POSTGRES_DB:-mythoslive}}
+      CORS_ORIGINS: '["http://localhost:3000"]'
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:-}
+      EMBEDDING_DIMENSION: ${EMBEDDING_DIMENSION:-}
+      TWITCH_CLIENT_ID: ${TWITCH_CLIENT_ID:-}
+      TWITCH_CLIENT_SECRET: ${TWITCH_CLIENT_SECRET:-}
+      TWITCH_BROADCASTER_REDIRECT_URI: ${TWITCH_BROADCASTER_REDIRECT_URI:-http://localhost:8000/api/twitch/oauth/broadcaster/callback}
+      TWITCH_BOT_REDIRECT_URI: ${TWITCH_BOT_REDIRECT_URI:-http://localhost:8000/api/twitch/oauth/bot/callback}
+      TWITCH_EVENTSUB_URL: ${TWITCH_EVENTSUB_URL:-wss://eventsub.wss.twitch.tv/ws}
+      EVENTSUB_MAX_RETRIES: ${EVENTSUB_MAX_RETRIES:-10}
+      CHAT_OUTBOX_MAX_SIZE: ${CHAT_OUTBOX_MAX_SIZE:-200}
+      CHAT_OUTBOX_BATCH_MAX_SIZE: ${CHAT_OUTBOX_BATCH_MAX_SIZE:-20}
+      CHAT_GLOBAL_MESSAGES_PER_30_SECONDS: ${CHAT_GLOBAL_MESSAGES_PER_30_SECONDS:-20}
+      CHAT_CHANNEL_INTERVAL_SECONDS: ${CHAT_CHANNEL_INTERVAL_SECONDS:-1.0}
+      CHAT_MAX_MESSAGE_LENGTH: ${CHAT_MAX_MESSAGE_LENGTH:-500}
+      COMMAND_MAX_INPUT_LENGTH: ${COMMAND_MAX_INPUT_LENGTH:-500}
+      COMMAND_GLOBAL_PER_SECOND: ${COMMAND_GLOBAL_PER_SECOND:-100}
+      COMMAND_USER_COOLDOWN_SECONDS: ${COMMAND_USER_COOLDOWN_SECONDS:-0.5}
+      AI_API_BASE_URL: ${AI_API_BASE_URL:-}
+      AI_API_KEY: ${AI_API_KEY:-}
+      AI_DIRECTOR_MODEL: ${AI_DIRECTOR_MODEL:-}
+      AI_FAST_MODEL: ${AI_FAST_MODEL:-}
+      AI_EMBEDDING_MODEL: ${AI_EMBEDDING_MODEL:-}
+      AI_MODERATION_MODEL: ${AI_MODERATION_MODEL:-}
+      AI_TIMEOUT_SECONDS: ${AI_TIMEOUT_SECONDS:-4.0}
+      AI_MAX_RETRIES: ${AI_MAX_RETRIES:-1}
+      AI_CIRCUIT_FAILURE_THRESHOLD: ${AI_CIRCUIT_FAILURE_THRESHOLD:-3}
+      AI_CIRCUIT_RESET_SECONDS: ${AI_CIRCUIT_RESET_SECONDS:-30}
+      AI_SESSION_TOKEN_BUDGET: ${AI_SESSION_TOKEN_BUDGET:-20000}
+      AI_SESSION_COST_BUDGET_USD: ${AI_SESSION_COST_BUDGET_USD:-1.0}
+      AI_INPUT_COST_PER_MILLION: ${AI_INPUT_COST_PER_MILLION:-0.0}
+      AI_OUTPUT_COST_PER_MILLION: ${AI_OUTPUT_COST_PER_MILLION:-0.0}
+      AI_TONE: ${AI_TONE:-heroic}
+      AI_FAMILY_FRIENDLY: ${AI_FAMILY_FRIENDLY:-true}
+      AI_BANNED_TOPICS: ${AI_BANNED_TOPICS:-[]}
+      AI_APPROVAL_MODE: ${AI_APPROVAL_MODE:-required}
+      QUILL_USER_COOLDOWN_SECONDS: ${QUILL_USER_COOLDOWN_SECONDS:-30}
+      QUILL_GLOBAL_MESSAGES_PER_MINUTE: ${QUILL_GLOBAL_MESSAGES_PER_MINUTE:-6}
+      MEMORY_CONTEXT_LIMIT: ${MEMORY_CONTEXT_LIMIT:-6}
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/workspace
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/readyz', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+
+  frontend:
+    build:
+      context: ./frontend
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - frontend-node-modules:/app/node_modules
+      - frontend-next-data:/app/.next
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+volumes:
+  postgres-data:
+  frontend-node-modules:
+  frontend-next-data:
